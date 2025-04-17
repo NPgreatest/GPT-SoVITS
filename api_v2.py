@@ -103,6 +103,8 @@ import sys
 import traceback
 from typing import Generator
 
+from starlette.middleware.cors import CORSMiddleware
+
 now_dir = os.getcwd()
 sys.path.append(now_dir)
 sys.path.append("%s/GPT_SoVITS" % (now_dir))
@@ -145,6 +147,16 @@ print(tts_config)
 tts_pipeline = TTS(tts_config)
 
 APP = FastAPI()
+
+# Enable CORS
+APP.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace "*" with specific origins if needed
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 class TTS_Request(BaseModel):

@@ -22,6 +22,8 @@ import yaml
 
 os.environ["TORCH_DISTRIBUTED_DEBUG"] = "INFO"
 torch.manual_seed(233333)
+print(torch.cuda.is_available())  # True 才说明 GPU 可用
+print(torch.cuda.get_device_name(0))  # 显卡名称
 tmp = os.path.join(now_dir, "TEMP")
 os.makedirs(tmp, exist_ok=True)
 os.environ["TEMP"] = tmp
